@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dahai.dao.QxHomeDAO">
+  <resultMap id="BaseResultMap" type="com.dahai.dao.model.QxHome">
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="date" jdbcType="VARCHAR" property="date" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="type_one" jdbcType="VARCHAR" property="typeOne" />
+    <result column="type_two" jdbcType="VARCHAR" property="typeTwo" />
+    <result column="type_one_name" jdbcType="VARCHAR" property="typeOneName" />
+    <result column="type_two_name" jdbcType="VARCHAR" property="typeTwoName" />
+    <result column="sort" jdbcType="VARCHAR" property="sort" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    title, intro, url, `date`, thumb, id, type_one, type_two, type_one_name, type_two_name, 
+    sort, content
+  </sql>
+  <select id="selectByExample" parameterType="com.dahai.dao.model.QxHomeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from qx_home
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+    <if test="forUpdate != null and forUpdate == true">
+      for update
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.dahai.dao.model.QxHomeExample">
+    delete from qx_home
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dahai.dao.model.QxHome">
+    insert into qx_home (title, intro, url, 
+      `date`, thumb, id, type_one, 
+      type_two, type_one_name, type_two_name, 
+      sort, content)
+    values (#{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{date,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{typeOne,jdbcType=VARCHAR}, 
+      #{typeTwo,jdbcType=VARCHAR}, #{typeOneName,jdbcType=VARCHAR}, #{typeTwoName,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dahai.dao.model.QxHome">
+    insert into qx_home
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="intro != null">
+        intro,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="date != null">
+        `date`,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="id != null">
+        id,
+      </if>
+      <if test="typeOne != null">
+        type_one,
+      </if>
+      <if test="typeTwo != null">
+        type_two,
+      </if>
+      <if test="typeOneName != null">
+        type_one_name,
+      </if>
+      <if test="typeTwoName != null">
+        type_two_name,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="intro != null">
+        #{intro,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOne != null">
+        #{typeOne,jdbcType=VARCHAR},
+      </if>
+      <if test="typeTwo != null">
+        #{typeTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOneName != null">
+        #{typeOneName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeTwoName != null">
+        #{typeTwoName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dahai.dao.model.QxHomeExample" resultType="java.lang.Long">
+    select count(*) from qx_home
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update qx_home
+    <set>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.intro != null">
+        intro = #{record.intro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        `date` = #{record.date,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thumb != null">
+        thumb = #{record.thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeOne != null">
+        type_one = #{record.typeOne,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeTwo != null">
+        type_two = #{record.typeTwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeOneName != null">
+        type_one_name = #{record.typeOneName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeTwoName != null">
+        type_two_name = #{record.typeTwoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update qx_home
+    set title = #{record.title,jdbcType=VARCHAR},
+      intro = #{record.intro,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      `date` = #{record.date,jdbcType=VARCHAR},
+      thumb = #{record.thumb,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=VARCHAR},
+      type_one = #{record.typeOne,jdbcType=VARCHAR},
+      type_two = #{record.typeTwo,jdbcType=VARCHAR},
+      type_one_name = #{record.typeOneName,jdbcType=VARCHAR},
+      type_two_name = #{record.typeTwoName,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
